@@ -4,9 +4,6 @@ jobs:
   terraform-deployment:
     runs-on: ubuntu-latest
     steps:
-  terraform-deployment:
-    runs-on: ubuntu-latest
-    permissions:
       packages: write
       contents: read
       id-token: write
