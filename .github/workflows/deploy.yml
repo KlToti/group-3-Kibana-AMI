@@ -1,12 +1,9 @@
-name: Deployment for Application configuration
-on: 
-  pull_request:
-    branches:
-      - main
-  push:
-    branches:
-      - main
+name: Deployment for Application Infrastructure and Configuration
+on: [push]
 jobs:
+  terraform-deployment:
+    runs-on: ubuntu-latest
+    steps:
   terraform-deployment:
     runs-on: ubuntu-latest
     permissions:
@@ -37,6 +34,7 @@ jobs:
         run: terraform apply -auto-approve
 
   ansible-deployment:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     permissions:
       packages: write
@@ -61,4 +59,4 @@ jobs:
         run: python3 -m pip install --user ansible
       
       - name: Run Ansible playbook
-        run: ansible-playbook playbook.yml    
+        run: ansible-playbook *    
