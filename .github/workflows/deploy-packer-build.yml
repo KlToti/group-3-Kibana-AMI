@@ -36,6 +36,6 @@ jobs:
         with:
           command: build
           target: .
-          working_directory: packer
+          working_directory: ./packer
 
 
