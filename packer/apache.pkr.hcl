@@ -29,4 +29,5 @@ build {
         playbook_file = "./ansible/playbook.yml"
     }
 }
+
 # /Users/yelizaveta.ivanchenko/src/Talent-Academy/projects/final_project/group-3-Kibana-AMI/packer/ansible/playbook.yml
