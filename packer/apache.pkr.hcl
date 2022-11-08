@@ -26,7 +26,7 @@ build {
         "source.amazon-ebs.ubuntu"
     ]
     provisioner "ansible" {
-        playbook_file = "https://github.com/KlToti/group-3-Kibana-AMI/blob/Create_AMI_for_Kibana_Application/packer/ansible/playbook.yml"
+        playbook_file = "./ansible/playbook.yml"
     }
 }
 
