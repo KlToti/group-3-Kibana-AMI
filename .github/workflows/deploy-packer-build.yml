@@ -7,7 +7,33 @@ on:
     branches:
       - Create_AMI_for_Kibana_Application
 jobs:
+  ansible-deployment:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+      id-token: write
+    steps:
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::217741831553:role/github-actions-oidc
+          aws-region: "eu-central-1"
+      
+      - name: Clone/Checkout your repository code
+        uses: actions/checkout@v2
 
+      - name: Install PIP
+        run: |
+          sudo apt update
+          sudo apt install python3-pip -y
+      
+      - name: Install Ansible
+        run: python3 -m pip install --user ansible
+      
+      - name: Run Ansible playbook
+        run: ansible-playbook playbook.yml    
+        
   packer-deployment:
     runs-on: ubuntu-latest
     permissions:
