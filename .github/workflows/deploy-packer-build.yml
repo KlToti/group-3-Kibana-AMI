@@ -29,7 +29,10 @@ jobs:
           sudo apt install python3-pip -y
       
       - name: Install Ansible
-        run: sudo apt install ansible
+        run: | 
+          sudo apt install ansible 
+          ls $GITHUB_WORKSPACE 
+          echo $GITHUB_PATH
       
       - name: Packer init
         uses: hashicorp/packer-github-actions@master
