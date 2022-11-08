@@ -1,0 +1,34 @@
+name: Deployment for Application configuration
+on: 
+  pull_request:
+    branches:
+      - Create_AMI_for_Kibana_Application
+  push:
+    branches:
+      - Create_AMI_for_Kibana_Application
+jobs:
+
+  packer-deployment:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+      id-token: write
+    steps:
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::217741831553:role/github-actions-oidc
+          aws-region: "eu-central-1"
+      
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Build Artifact
+        uses: hashicorp/packer-github-actions@master
+        with:
+          command: build
+          target: .
+          working_directory: packer
+
+

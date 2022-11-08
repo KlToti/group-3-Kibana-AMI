@@ -38,7 +38,7 @@
 
     - name: Configure kibana.yml File
       copy:
-        src: ./kibana.yml
+        src: ./files/kibana.yml
         dest: /etc/kibana/kibana.yml
 
     - name: Enabling Kibana service
