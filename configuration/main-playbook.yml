@@ -1,0 +1,22 @@
+---
+- hosts: webserver
+  become: yes # become Superuser (global)
+  tasks:
+    - name: Update the apt-get of the machine
+      apt:
+        update_cache: yes
+
+    - name: Install apache2
+      apt: 
+        name: apache2
+        state: present # present state is optional
+    
+    - name: Copy my index.html file to the webserver
+      copy: 
+        src: "index.html" # quotes just to show thats a filename/path/string. They are not necessary
+        dest: "/var/www/html/"
+        
+    - name: Restart the apache2 service
+      service:
+        name: apache2
+        state: restarted

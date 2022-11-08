@@ -1,0 +1,6 @@
+instance_type = "t3.small"
+region = "eu-central-1"
+ami_owner = "099720109477"
+source_ami_name = "ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"
+vpc_name = "elk-project-vpc"
+subnet_name = "elk-public"
