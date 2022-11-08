@@ -1,0 +1,5 @@
+vpc_name = "elk-project-vpc"
+public_subnet_name =  "elk-public"
+ubuntu_name = "ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*"
+ami_owner = "099720109477"
+keypair_name = "final-project-ec2"
