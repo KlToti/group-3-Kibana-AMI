@@ -26,6 +26,7 @@ build {
         "source.amazon-ebs.ubuntu"
     ]
     provisioner "ansible" {
-        playbook_file = "ansible/playbook.yml"
+        playbook_file = "./ansible/playbook.yml"
     }
 }
+# /Users/yelizaveta.ivanchenko/src/Talent-Academy/projects/final_project/group-3-Kibana-AMI/packer/ansible/playbook.yml
