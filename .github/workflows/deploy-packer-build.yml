@@ -23,6 +23,13 @@ jobs:
       
       - name: Checkout Repository
         uses: actions/checkout@v2
+      
+      - name: Packer init
+        uses: hashicorp/packer-github-actions@master
+        with:
+          command: init
+          target: .
+          working_directory: packer
 
       - name: Build Artifact
         uses: hashicorp/packer-github-actions@master
