@@ -42,7 +42,7 @@ jobs:
         uses: hashicorp/packer-github-actions@master
         with:
           command: build
-          target: main.pkr.hcl apache.pkr.hcl default-vars.auto.pkrvars.hcl variables.pkr.hcl
-          working_directory: packer
+          target: .
+          working_directory: ./packer
 
 
