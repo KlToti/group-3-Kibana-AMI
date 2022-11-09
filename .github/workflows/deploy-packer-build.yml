@@ -1,0 +1,52 @@
+name: Deployment for Application configuration
+on: 
+  pull_request:
+    branches:
+      - Create_AMI_for_Kibana_Application
+  push:
+    branches:
+      - Create_AMI_for_Kibana_Application
+jobs:
+  ansible-deployment:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+      id-token: write
+    steps:
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::217741831553:role/github-actions-oidc
+          aws-region: "eu-central-1"
+      
+      - name: Clone/Checkout your repository code
+        uses: actions/checkout@v2
+
+      - name: Install PIP
+        run: |
+          sudo apt update
+          sudo apt install python3-pip -y
+      
+      - name: Install Ansible
+        run: | 
+          sudo apt install ansible
+          echo $PATH
+          ls $GITHUB_WORKSPACE 
+          echo $GITHUB_PATH
+      
+      - name: Packer init
+        uses: hashicorp/packer-github-actions@master
+        with:
+          command: init
+          target: .
+          working_directory: packer
+
+      - name: Build Artifact
+        uses: hashicorp/packer-github-actions@master
+        with:
+          command: build
+          target: .
+          working_directory: ./packer
+
+

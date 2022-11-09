@@ -1,0 +1,55 @@
+---
+- name: Provision Image
+  hosts: default
+  become: true
+
+  tasks:
+    - name: Update repositories cache and install Java
+      apt:
+        name: default-jre
+        update_cache: yes
+
+    - name: Update repositories cache and install apt-transport-https
+      apt:
+        name: apt-transport-https
+        update_cache: yes
+    
+    - name: Update repositories cache and install Openssl
+      apt:
+        name: openssl
+        update_cache: yes
+
+    - name: Import the Elastic Key
+      apt_key:
+        url: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+        state: present
+
+    - name: Adding Kibana APT repository
+      apt_repository:
+        repo: deb https://artifacts.elastic.co/packages/8.x/apt stable main
+        state: present
+        filename: elastic-8.x.list
+        update_cache: yes
+
+    - name: Update repositories cache and install Kibana
+      apt:
+        name: kibana
+        update_cache: yes
+
+    - name: Configure kibana.yml File
+      copy:
+        src: ./files/kibana.yml
+        dest: /etc/kibana/kibana.yml
+
+    - name: Enabling Kibana service
+      systemd:
+        name: kibana
+        enabled: yes
+        daemon_reload: yes
+        
+    - name: Starting Kibana service
+      systemd:
+        name: kibana
+        state: started
+    - name: Ensure Kibana is running
+      systemd: state=started name=kibana
